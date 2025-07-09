@@ -1,0 +1,33 @@
+name: Publish Dependency BOM to GitHub Packages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK on VM
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Publish to GitHub Packages
+        env:
+          USERNAME: ${{ github.actor }}
+          TOKEN: ${{ secrets.PACKAGE_PUBLISHER }}
+        run: |
+          ./gradlew publish

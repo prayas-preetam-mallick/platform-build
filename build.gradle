@@ -1,0 +1,4 @@
+allprojects {
+    it.group = 'com.safestorage'
+    it.apply from: "${rootProject.projectDir}/gradle/repositories.gradle"
+}
