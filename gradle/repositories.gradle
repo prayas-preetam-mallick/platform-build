@@ -11,8 +11,8 @@ ext.configurePublishingRepositories = { PublishingExtension publishing ->
             name = "PlatformBuild"
             url = "https://maven.pkg.github.com/prayas-preetam-mallick/platform-build"
             credentials {
-                username = findProperty("repoUser") ?: System.getenv("REPO_USER")
-                password = findProperty("repoPassword") ?: System.getenv("REPO_PASSWORD")
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
     }
